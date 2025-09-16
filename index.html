@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule time table🚀</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 16px;
+    }
+    #clock {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 24px;
+    }
+    #current-professor {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      font-weight: bold;
+      white-space: pre-line; /* 여러 줄 출력 허용 */
+    }
+  </style>
+</head>
+<body>
+  <h1>Schedule time table🚀</h1>
+
+  <!-- 현재 시간 -->
+  <h2>현재 시간 ⏰</h2>
+  <div id="clock"></div>
+
+  <!-- 현재 수업 중인 교수님 -->
+  <h2>현재 수업 중인 교수님 🔔</h2>
+  <div id="current-professor">확인 중...</div>
+
+  <script>
+    // ===== 현재 시간 표시 =====
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+      document.getElementById("clock").textContent =
+        `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ===== 교수님 시간표 (강의명 포함) =====
+    const schedule = [
+      {
+        name: "엄**",
+        schedule: [
+          { day: "월", start: "14:00", end: "15:50", subject: "7229 범주형자료분석" },
+          { day: "수", start: "14:00", end: "14:50", subject: "7229 범주형자료분석자료구조" },
+          { day: "화", start: "13:30", end: "14:45", subject: "7226 베이지안 통계학" },
+          { day: "목", start: "13:30", end: "14:45", subject: "7226 베이지안 통계학" },
+          { day: "월", start: "16:00", end: "16:50", subject: "7226 수리통계학" },
+          { day: "수", start: "15:00", end: "16:30", subject: "7226 수리통계학" },
+          { day: "월", start: "09:00", end: "11:50", subject: "박사논문연구" }, // 대학원
+          { day: "화", start: "09:00", end: "11:50", subject: "박사논문연구" }, // 대학원
+          { day: "금", start: "10:00", end: "11:50", subject: "한국해양대학교 확률과 통계" }, // 오전 외부강의 출강
+          { day: "금", start: "15:15", end: "16:30", subject: "7231 부산 과학고 수업" } // 과학고 수업
+        ]
+      },
+      {
+        name: "박**",
+        schedule: [
+          { day: "월", start: "14:00", end: "15:50", subject: "7226 표본론" },
+          { day: "수", start: "14:00", end: "14:50", subject: "7226 표본론" }
+        ]
+      },
+      {
+        name: "최**",
+        schedule: [
+          { day: "화", start: "10:00", end: "11:50", subject: "7226 행렬대수" },
+          { day: "목", start: "11:00", end: "11:50", subject: "7226 행렬대수" },
+          { day: "화", start: "13:30", end: "14:45", subject: "7229 R 프로그래밍" },
+          { day: "목", start: "13:30", end: "14:45", subject: "7229 R 프로그래밍" }
+        ]
+      },
+      {
+        name: "오**",
+        schedule: [
+          { day: "화", start: "15:00", end: "16:15", subject: "7226 다변량자료분석" },
+          { day: "목", start: "15:00", end: "16:15", subject: "7226 다변량자료분석" },
+          { day: "화", start: "10:30", end: "11:30", subject: "7229 통계데이터사이언스 특강" },
+          { day: "목", start: "10:30", end: "11:30", subject: "7229 통계데이터사이언스 특강" },
+          { day: "수", start: "15:00", end: "17:50", subject: "7126 대학원" } //대학원
+        ]
+      },
+      {
+        name: "하**",
+        schedule: [
+          { day: "화", start: "10:00", end: "11:50", subject: "7129 통계계산 및 최적화" },
+          { day: "목", start: "10:00", end: "10:50", subject: "7129 통계계산 및 최적화" },
+          { day: "화", start: "14:00", end: "14:50", subject: "7231 딥러닝의 이해" },
+          { day: "목", start: "13:00", end: "14:50", subject: "7231 딥러닝의 이해" },
+          { day: "월", start: "15:00", end: "17:50", subject: "7126 대학원" } //대학원
+        ]
+      },
+      {
+        name: "김**",
+        schedule: [
+          { day: "월", start: "11:00", end: "11:50", subject: "7229 통계학 입문" },
+          { day: "수", start: "10:00", end: "11:50", subject: "7229 통계학 입문" },
+          { day: "월", start: "16:00", end: "17:50", subject: "7229 통계학 개론 2" }, //타학과
+          { day: "수", start: "15:00", end: "15:50", subject: "7229 통계학 개론 2" }, //
+          { day: "화", start: "15:00", end: "17:50", subject: "7126 대학원" }, // 대학원
+          { day: "금", start: "15:00", end: "15:30", subject: "7229 부산일과학고 수업" } // 과학고 수업
+        ]
+      },
+
+      {
+        name: "외부강사 김**",
+        schedule: [
+          { day: "화", start: "15:00", end: "16:15", subject: "7229 데이터사이언스 개론" },
+          { day: "목", start: "15:00", end: "16:15", subject: "7229 데이터사이언스 개론" }
+        ]
+      }
+      // 👉 다른 교수님도 같은 형식으로 추가 가능
+    ];
+
+    // 요일 변환
+    const dayMap = ["일","월","화","수","목","금","토"];
+
+    function checkCurrentProfessor() {
+      const now = new Date();
+      const currentDay = dayMap[now.getDay()];
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+
+      const teachingNow = [];
+
+      schedule.forEach(prof => {
+        prof.schedule.forEach(cls => {
+          if (cls.day === currentDay) {
+            const [sh, sm] = cls.start.split(":").map(Number);
+            const [eh, em] = cls.end.split(":").map(Number);
+            const startMins = sh * 60 + sm;
+            const endMins = eh * 60 + em;
+
+            if (currentTime >= startMins && currentTime < endMins) {
+              teachingNow.push(
+                `${prof.name} - ${cls.subject} (${cls.start} ~ ${cls.end})`
+              );
+            }
+          }
+        });
+      });
+
+      const output = document.getElementById("current-professor");
+      if (teachingNow.length > 0) {
+        output.textContent = teachingNow.join("\n"); // 여러 줄 출력
+      } else {
+        output.textContent = "현재 수업 중인 교수님이 없습니다.";
+      }
+    }
+
+    setInterval(checkCurrentProfessor, 10000); // 10초마다 확인
+    checkCurrentProfessor();
+  </script>
+</body>
+</html>
